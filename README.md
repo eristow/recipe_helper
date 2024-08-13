@@ -1,5 +1,18 @@
 # Recipe Helper Front-End
 
+## TODO:
+
+- [ ] Remove boilerplate from Vite template
+- [ ] Extract recipe CRUD functions to a service
+- [ ] Convert recipes output to a table component
+  - [ ] Add buttons for edit and delete to table
+  - [ ] Click on a row to go to the recipe detail page
+- [ ] Add a recipe detail page
+- [ ] Add a recipe creation page
+- [ ] Add a recipe edit page
+- [ ] Add a recipe deletion function
+- [ ] Add search bar to recipes view
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -20,7 +33,7 @@ export default tseslint.config({
   languageOptions: {
     // other options...
     parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
       tsconfigRootDir: import.meta.dirname,
     },
   },
@@ -33,11 +46,11 @@ export default tseslint.config({
 
 ```js
 // eslint.config.js
-import react from 'eslint-plugin-react';
+import react from "eslint-plugin-react";
 
 export default tseslint.config({
   // Set the react version
-  settings: { react: { version: '18.3' } },
+  settings: { react: { version: "18.3" } },
   plugins: {
     // Add the react plugin
     react,
@@ -46,7 +59,7 @@ export default tseslint.config({
     // other rules...
     // Enable its recommended rules
     ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
+    ...react.configs["jsx-runtime"].rules,
   },
 });
 ```
