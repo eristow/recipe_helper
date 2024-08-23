@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import H1 from "./components/H1";
+import P from "./components/P";
 
 type Recipe = {
   id: number;
@@ -11,59 +10,42 @@ type Recipe = {
 };
 
 function App() {
-  const [count, setCount] = useState(0);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  const fetchRecipes = async () => {
-    // TODO: extract URL to .env file
-    // TODO: extract fetch to a service
-    try {
-      const response = await fetch("http://localhost:8080/recipes");
-      const data: Recipe[] = await response.json();
-      console.log(data);
-      setRecipes(data);
-    } catch (error) {
-      console.error(`Failed to fetch recipes: ${error}`);
-    }
-  };
-
   useEffect(() => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+    async function fetchRecipes() {
+      // TODO: extract fetch to a service?
+      try {
+        const response = await fetch(`${backendUrl}/recipes`);
+        const data: Recipe[] = await response.json();
+        console.log(data);
+        setRecipes(data);
+      } catch (error) {
+        console.error(`Failed to fetch recipes: ${error}`);
+      }
+    }
+
     fetchRecipes();
   }, []);
 
   return (
-    <>
-      <div className="flex justify-center">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex h-screen w-screen flex-col justify-start bg-neutral-700 align-top">
+      <div className="mx-auto mt-2 rounded-xl border-4 border-solid border-transparent bg-neutral-800 p-4">
+        <H1>Recipe Helper</H1>
+        <div>
+          {recipes.map((recipe: Recipe) => (
+            <div key={recipe.id}>
+              <P>{recipe.id}</P>
+              <P>{recipe.name}</P>
+              <P>{recipe.ingredients.join(", ")}</P>
+              <P>{recipe.steps.join(", ")}</P>
+            </div>
+          ))}
+        </div>
       </div>
-      <h1 className="text-3xl font-bold underline">Vite + React</h1>
-      <div>
-        {recipes.map((recipe: Recipe) => (
-          <div key={recipe.id}>
-            <p>{recipe.id}</p>
-            <p>{recipe.name}</p>
-            <p>{recipe.ingredients.join(", ")}</p>
-            <p>{recipe.steps.join(", ")}</p>
-          </div>
-        ))}
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 

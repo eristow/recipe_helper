@@ -2,7 +2,6 @@
 
 ## TODO:
 
-- [ ] Remove boilerplate from Vite template
 - [ ] Extract recipe CRUD functions to a service
 - [ ] Convert recipes output to a table component
   - [ ] Add buttons for edit and delete to table
@@ -12,6 +11,7 @@
 - [ ] Add a recipe edit page
 - [ ] Add a recipe deletion function
 - [ ] Add search bar to recipes view
+- [x] Remove boilerplate from Vite template
 
 ## React + TypeScript + Vite
 
