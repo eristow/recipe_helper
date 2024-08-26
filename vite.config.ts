@@ -11,4 +11,9 @@ export default {
     port: 3000,
     strictPort: true,
   },
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
 } satisfies UserConfig;

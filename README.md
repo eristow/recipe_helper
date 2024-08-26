@@ -2,7 +2,6 @@
 
 ## TODO:
 
-- [ ] Extract recipe CRUD functions to a service
 - [ ] Convert recipes output to a table component
   - [ ] Add buttons for edit and delete to table
   - [ ] Click on a row to go to the recipe detail page
@@ -10,6 +9,8 @@
 - [ ] Add a recipe creation page
 - [ ] Add a recipe edit page
 - [ ] Add a recipe deletion function
+- [ ] Add images for recipes
+- [ ] Extract recipe CRUD functions to a service
 - [ ] Add search bar to recipes view
 - [x] Remove boilerplate from Vite template
 
