@@ -2,17 +2,21 @@
 
 ## TODO:
 
-- [ ] Convert recipes output to a table component
-  - [ ] Add buttons for edit and delete to table
-  - [ ] Click on a row to go to the recipe detail page
-- [ ] Add a recipe detail page
-- [ ] Add a recipe creation page
-- [ ] Add a recipe edit page
-- [ ] Add a recipe deletion function
-- [ ] Add images for recipes
+- [ ] Create forms
+  - [ ] Add a recipe creation page
+  - [ ] Add a recipe edit page
 - [ ] Extract recipe CRUD functions to a service
+- [ ] Add images for recipes
 - [ ] Add search bar to recipes view
+- [ ] Add fridge/pantry ingredient input
+- [ ] Add recipe suggestion based on fridge/pantry ingredients
+- [ ] Add a shopping list view
 - [x] Remove boilerplate from Vite template
+- [x] Convert recipes output to a table component
+  - [x] Add buttons for edit and delete to table
+  - [x] Click on a row to go to the recipe detail page
+- [x] Add a recipe detail page
+- [x] Add a recipe deletion function
 
 ## React + TypeScript + Vite
 

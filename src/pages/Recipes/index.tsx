@@ -1,7 +1,5 @@
-import Button from "@/components/Button";
 import H1 from "@/components/H1";
 import H2 from "@/components/H2";
-import P from "@/components/P";
 import PageContainer from "@/components/PageContainer";
 import Recipe from "@/types/Recipe";
 import { useEffect, useState } from "react";
@@ -13,6 +11,7 @@ export default function Recipes() {
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+    // TODO: cache this?
     async function fetchRecipes() {
       // TODO: extract fetch to a service?
       try {
@@ -28,29 +27,14 @@ export default function Recipes() {
     fetchRecipes();
   }, []);
 
-  async function deleteRecipe(id: string) {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
-    try {
-      await fetch(`${backendUrl}/recipes/${id}`, {
-        method: "DELETE",
-      });
-      setRecipes((prevRecipes) =>
-        prevRecipes.filter((recipe) => recipe.id !== id),
-      );
-    } catch (error) {
-      console.error(`Failed to delete recipe: ${error}`);
-    }
-  }
-
   return (
     <PageContainer>
       <div className="grid grid-flow-row">
         <H1>Recipes</H1>
         {recipes.map((recipe: Recipe) => (
-          // TODO: the text in the divs should be centered
+          // TODO: the text in the text should be centered in this div
           <div
-            className="mb-2 flex justify-between rounded-xl border-4 border-solid border-blue-800 p-4"
+            className="mb-2 flex min-w-56 justify-center rounded-xl border-4 border-solid border-blue-800 p-4 align-middle"
             key={recipe.id}
           >
             <Link
@@ -60,12 +44,6 @@ export default function Recipes() {
             >
               <H2 className="m-auto">{recipe.name}</H2>
             </Link>
-            <Link className="p-4" to={`/recipes/edit/${recipe.id}`}>
-              <P>Edit</P>
-            </Link>
-            <Button onClick={() => deleteRecipe(recipe.id)}>
-              <P>Delete</P>
-            </Button>
           </div>
         ))}
       </div>

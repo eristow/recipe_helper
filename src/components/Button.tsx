@@ -1,9 +1,19 @@
 import { cn } from "@/utils/cn";
 import { HTMLAttributes } from "react";
 
-export default function Button(props: HTMLAttributes<HTMLButtonElement>) {
-  const buttonClasses = "bg-primary-500 text-white px-4 py-2 rounded-lg";
-  const combinedClasses = cn(buttonClasses, props.className);
+export const buttonClasses =
+  "rounded-lg border border-solid border-neutral-700 bg-neutral-600 px-4 py-2 text-white shadow-md";
 
-  return <button className={combinedClasses}>{props.children}</button>;
+export default function Button({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLButtonElement>) {
+  const combinedClasses = cn(buttonClasses, className);
+
+  return (
+    <button className={combinedClasses} {...props}>
+      {children}
+    </button>
+  );
 }
