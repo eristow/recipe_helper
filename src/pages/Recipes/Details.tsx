@@ -40,7 +40,11 @@ export function Details() {
     <PageContainer>
       <H1>{`${recipe.name}`}</H1>
       <div className="flex justify-between">
-        <Link className={buttonClasses} to={`/recipes/edit/${recipe.id}`}>
+        <Link
+          className={buttonClasses}
+          to={`/recipes/edit/${recipe.id}`}
+          state={{ recipe }}
+        >
           <P>Edit</P>
         </Link>
         <Button onClick={() => deleteRecipe(recipe.id)}>
