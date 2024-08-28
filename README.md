@@ -1,4 +1,8 @@
 # Recipe Helper Front-End
+This app is a recipe helper that allows users to add, view, and delete recipes. It is a React application created with Vite and TypeScript. Styling is done with Tailwind CSS.
+
+* docker build -t recipe_helper_frontend .
+* docker run -p 3000:3000 recipe_helper_frontend
 
 ## TODO:
 

@@ -2,7 +2,7 @@
 FROM node:22
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /frontend
 
 # Copy the package.json and pnpm-lock.yaml files to the working directory
 COPY package.json pnpm-lock.yaml ./
