@@ -1,7 +1,7 @@
 import H1 from "@/components/H1";
 import H2 from "@/components/H2";
 import PageContainer from "@/components/PageContainer";
-import Recipe from "@/types/Recipe";
+import { Recipe } from "@/types/Recipe";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -29,10 +29,12 @@ export default function Recipes() {
 
   return (
     <PageContainer>
-      <div className="grid grid-flow-row">
+      <div className="grid grid-flow-row justify-center">
         <H1>Recipes</H1>
+        <Link className="p-4 text-blue-700" to="/recipes/create">
+          <H2>Create New Recipe</H2>
+        </Link>
         {recipes.map((recipe: Recipe) => (
-          // TODO: the text in the text should be centered in this div
           <div
             className="mb-2 flex min-w-56 justify-center rounded-xl border-4 border-solid border-blue-800 p-4 align-middle"
             key={recipe.id}

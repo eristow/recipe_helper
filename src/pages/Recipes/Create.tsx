@@ -1,14 +1,9 @@
 import Button from "@/components/Button";
 import H1 from "@/components/H1";
 import PageContainer from "@/components/PageContainer";
-import { Recipe } from "@/types/Recipe";
+import { RecipeNoId } from "@/types/Recipe";
 import { cn } from "@/utils/cn";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
-// TODO: move this to a shared location for Edit and Details?
-interface LocationState {
-  recipe: Recipe;
-}
+import { useNavigate } from "react-router-dom";
 
 function InputContainer({
   label,
@@ -29,23 +24,12 @@ const inputClassNames =
   "rounded-lg border border-solid border-neutral-800 bg-neutral-900 p-1";
 const textAreaClassNames = cn(inputClassNames, "h-32");
 
-export default function Edit() {
-  const { recipeId } = useParams();
-  const state = useLocation().state as LocationState;
+export default function Create() {
   const navigate = useNavigate();
-  let recipe: Recipe = { id: "0", name: "", ingredients: [], steps: [] };
-  console.log(state);
-
-  if (!state?.recipe) {
-    // TODO: handle getting recipe by id from backend
-    console.log(`Getting recipe with id: ${recipeId}`);
-  } else {
-    recipe = state.recipe;
-  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(`Saving recipe with id: ${recipeId}`);
+    console.log(`Creating new recipe...`);
 
     const recipeName = event.currentTarget.recipeName.value;
     const recipeIngredients = event.currentTarget.recipeIngredients.value;
@@ -54,29 +38,28 @@ export default function Edit() {
     const ingredients = recipeIngredients.split("\n");
     const steps = recipeSteps.split("\n");
 
-    const updatedRecipe = {
-      ...recipe,
+    const newRecipe: RecipeNoId = {
       name: recipeName,
       ingredients,
       steps,
     };
-    console.log(updatedRecipe);
+    console.log(newRecipe);
 
-    saveRecipe(updatedRecipe);
+    createRecipe(newRecipe);
 
     navigate("/recipes");
   }
 
-  async function saveRecipe(updatedRecipe: Recipe) {
+  async function createRecipe(newRecipe: RecipeNoId) {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     try {
-      await fetch(`${backendUrl}/recipes/${recipeId}`, {
-        method: "PUT",
+      await fetch(`${backendUrl}/recipes/`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedRecipe),
+        body: JSON.stringify(newRecipe),
       });
     } catch (error) {
       console.error(`Failed to save recipe: ${error}`);
@@ -86,7 +69,7 @@ export default function Edit() {
 
   return (
     <PageContainer>
-      <H1>Edit {recipe.name}</H1>
+      <H1>Create Recipe</H1>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-flow-row gap-2">
           <InputContainer label="Recipe Name:">
@@ -94,21 +77,21 @@ export default function Edit() {
               name="recipeName"
               className={inputClassNames}
               type="text"
-              defaultValue={recipe.name}
+              placeholder="Recipe Name"
             />
           </InputContainer>
           <InputContainer label="Recipe Ingredients:">
             <textarea
               name="recipeIngredients"
               className={textAreaClassNames}
-              defaultValue={recipe.ingredients.join("\n")}
+              placeholder="Enter ingredients, one per line"
             />
           </InputContainer>
           <InputContainer label="Recipe Steps:">
             <textarea
               name="recipeSteps"
               className={textAreaClassNames}
-              defaultValue={recipe.steps.join("\n")}
+              placeholder="Enter steps, one per line"
             />
           </InputContainer>
           <Button type="submit">Save</Button>

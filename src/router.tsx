@@ -5,6 +5,7 @@ import ErrorPage from "./components/ErrorPage";
 import Home from "./pages/Home";
 import { Details } from "./pages/Recipes/Details";
 import Edit from "./pages/Recipes/Edit";
+import Create from "./pages/Recipes/Create";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/recipes/:recipeId",
         element: <Details />,
+      },
+      {
+        path: "/recipes/create",
+        element: <Create />,
       },
       {
         path: "/recipes/edit/:recipeId",

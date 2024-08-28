@@ -2,13 +2,21 @@
 
 ## TODO:
 
-- [ ] Create forms
-  - [ ] Add a recipe creation page
+- [ ] CSS Improvements
+  - [ ] Fix buttons on header
+  - [ ] Add hover transform (darker) to buttons/links
+
+- [ ] Combine FE and BE into monorepo
+  - [ ] Create docker files for both
+  - [ ] Use docker-compose to run both
+- [ ] Use GitHub Actions to deploy to ... somewhere
+
 - [ ] Extract recipe CRUD functions to a service
 - [ ] Add images for recipes
 - [ ] Add search bar to recipes view
 - [ ] Add fridge/pantry ingredient input
 - [ ] Add recipe suggestion based on fridge/pantry ingredients
+  - [ ] Use Ollama locally, but what to use when deployed?
 - [ ] Add a shopping list view
 
 ## Done:
@@ -19,6 +27,7 @@
 - [x] Add a recipe detail page
 - [x] Add a recipe deletion function
 - [x] Add a recipe edit page
+- [x] Add a recipe creation page
 
 ## React + TypeScript + Vite
 
