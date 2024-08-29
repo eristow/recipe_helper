@@ -8,7 +8,7 @@ The front-end is a React application created with Vite and TypeScript. Styling i
 The back-end is a Go application that uses the `net/http` package to create a web server. The app currently uses an in-memory "database" to store recipes.
 
 ## Running the App
-* `dc up`
+* For local dev: `dc up`
 * To run the FE and BE containers outside of docker-compose:
 	* `./frontend/run.sh`
 	* `./backend/run.sh`

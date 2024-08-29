@@ -13,15 +13,11 @@ RUN go mod download
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Install air for live reload
-RUN go install github.com/air-verse/air@latest
-
 # Build the Go app
-# RUN go build -o main ./cmd/service/main.go
+RUN go build -o main ./cmd/service/main.go
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
 # Command to run the executable
-# CMD ["./main"]
-CMD ["air", "-c", ".air.toml"]
+CMD ["./main"]

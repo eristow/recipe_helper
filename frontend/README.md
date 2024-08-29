@@ -7,8 +7,6 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 ## TODO:
 
-- [ ] Combine FE and BE into monorepo
-- [ ] Create production Dockerfiles for FE and BE
 - [ ] Use GitHub Actions to deploy to ... somewhere
 
 - [ ] Add tests
@@ -38,6 +36,8 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
   - [ ] Drop shadow on page container?
 
 ## Done:
+- [x] Create production Dockerfiles for FE and BE
+- [x] Combine FE and BE into monorepo
 - [x] Use docker-compose to run both
 - [x] Ensure hot/live reload works for both
 - [x] Create docker files for both

@@ -20,4 +20,4 @@ RUN pnpm run build
 EXPOSE 3000
 
 # Start the React app
-CMD ["pnpm", "run", "dev"]
+CMD ["pnpm", "run", "preview"]

@@ -15,6 +15,8 @@ services:
       - ./frontend:/frontend
       - /frontend/node_modules
 
+    command: pnpm run dev
+
   backend:
     container_name: backend
 
@@ -29,3 +31,6 @@ services:
 
     volumes:
       - ./backend:/backend
+
+    command: sh -c "go install github.com/air-verse/air@latest &&
+      air -c .air.toml"
