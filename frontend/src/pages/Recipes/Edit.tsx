@@ -1,6 +1,6 @@
-import Button from "@/components/Button";
-import H1 from "@/components/H1";
-import PageContainer from "@/components/PageContainer";
+import Button from "@/components/Button/Button";
+import H1 from "@/components/H1/H1";
+import PageContainer from "@/components/PageContainer/PageContainer";
 import { Recipe } from "@/types/Recipe";
 import { cn } from "@/utils/cn";
 import { useLocation, useNavigate, useParams } from "react-router-dom";

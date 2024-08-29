@@ -1,6 +1,6 @@
-import H1 from "@/components/H1";
-import H2 from "@/components/H2";
-import PageContainer from "@/components/PageContainer";
+import H1 from "@/components/H1/H1";
+import H2 from "@/components/H2/H2";
+import PageContainer from "@/components/PageContainer/PageContainer";
 import { Recipe } from "@/types/Recipe";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -38,6 +38,7 @@ export default function Recipes() {
           <div
             className="mb-2 flex min-w-56 justify-center rounded-xl border-4 border-solid border-blue-800 p-4 align-middle"
             key={recipe.id}
+            data-testid="recipe-list"
           >
             <Link
               className="p-4"

@@ -1,8 +1,8 @@
-import Button, { buttonClasses } from "@/components/Button";
-import H1 from "@/components/H1";
-import H2 from "@/components/H2";
-import P from "@/components/P";
-import PageContainer from "@/components/PageContainer";
+import Button, { buttonClasses } from "@/components/Button/Button";
+import H1 from "@/components/H1/H1";
+import H2 from "@/components/H2/H2";
+import P from "@/components/P/P";
+import PageContainer from "@/components/PageContainer/PageContainer";
 import { Recipe } from "@/types/Recipe";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 

@@ -10,15 +10,6 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 - [ ] Use GitHub Actions to deploy to ... somewhere
 
 - [ ] Add tests
-  - [ ] Add tests for recipe CRUD functions
-  - [ ] Add tests for recipe service
-  - [ ] Add tests for recipe component
-  - [ ] Add tests for recipe table component
-  - [ ] Add tests for recipe detail component
-  - [ ] Add tests for recipe form component
-  - [ ] Add tests for recipe edit component
-  - [ ] Add tests for recipe delete component
-  - [ ] Add tests for recipe create component
   - [ ] Run tests in GitHub Actions
 
 - [ ] Extract recipe CRUD functions to a service
