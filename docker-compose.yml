@@ -5,18 +5,15 @@ services:
     image: recipe_helper_frontend
 
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
 
     ports:
-      - "3000:3000"
+      - '3000:3000'
 
     volumes:
-      - .:/frontend
+      - ./frontend:/frontend
       - /frontend/node_modules
-
-    depends_on:
-      - backend
 
   backend:
     container_name: backend
@@ -24,11 +21,11 @@ services:
     image: recipe_helper_backend
 
     build:
-      context: ../recipe_helper_backend
+      context: ./backend
       dockerfile: Dockerfile
 
     ports:
-      - "8080:8080"
+      - '8080:8080'
 
     volumes:
-      - ../recipe_helper_backend:/backend
+      - ./backend:/backend
