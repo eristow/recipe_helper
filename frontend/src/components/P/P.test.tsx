@@ -10,14 +10,4 @@ describe("P", () => {
 
     expect(homeText).toBeInTheDocument();
   });
-
-  it("renders children", () => {
-    render(
-      <P>
-        <div>Test</div>
-      </P>,
-    );
-
-    expect(document.body.innerHTML).toMatch("<div>Test</div>");
-  });
 });

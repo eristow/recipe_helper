@@ -4,6 +4,7 @@ import H2 from "@/components/H2/H2";
 import P from "@/components/P/P";
 import PageContainer from "@/components/PageContainer/PageContainer";
 import { Recipe } from "@/types/Recipe";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface LocationState {
@@ -12,13 +13,21 @@ interface LocationState {
 
 export function Details() {
   const { recipeId } = useParams();
-  const { recipe } = useLocation().state as LocationState;
+  const locationState = useLocation().state as LocationState;
   const navigate = useNavigate();
+  const [recipe, setRecipe] = useState<Recipe>(locationState.recipe);
 
-  if (!recipe) {
+  useEffect(() => {
     // TODO: handle getting recipe by id from backend
-    console.log(`Getting recipe with id: ${recipeId}`);
-  }
+    async function getRecipeById(id: string) {
+      console.log(`Getting recipe with id: ${id}`);
+      setRecipe({} as Recipe);
+    }
+
+    if (recipeId && !recipe) {
+      getRecipeById(recipeId);
+    }
+  }, []);
 
   async function deleteRecipe(id: string) {
     console.log(`Deleting recipe with id: ${id}`);
