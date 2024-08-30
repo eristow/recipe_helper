@@ -9,35 +9,35 @@ import (
 
 // In-memory datastore
 type Datastore struct {
-	m map[string]recipe.Recipe
-	*sync.RWMutex
+	m  map[string]recipe.Recipe
+	mu *sync.RWMutex
 }
 
 func NewDatastore() *Datastore {
 	return &Datastore{
-		m:       make(map[string]recipe.Recipe),
-		RWMutex: &sync.RWMutex{},
+		m:  make(map[string]recipe.Recipe),
+		mu: &sync.RWMutex{},
 	}
 }
 
 func (ds *Datastore) AddRecipe(r *recipe.Recipe) {
-	ds.Lock()
-	defer ds.Unlock()
+	ds.mu.Lock()
+	defer ds.mu.Unlock()
 
 	key := r.Id.String()
 	ds.m[key] = *r
 }
 
 func (ds *Datastore) UpdateRecipe(key string, r *recipe.Recipe) {
-	ds.Lock()
-	defer ds.Unlock()
+	ds.mu.Lock()
+	defer ds.mu.Unlock()
 
 	ds.m[key] = *r
 }
 
 func (ds *Datastore) GetRecipeByName(key string) (*recipe.Recipe, bool) {
-	ds.RLock()
-	defer ds.RUnlock()
+	ds.mu.RLock()
+	defer ds.mu.RUnlock()
 
 	var recipe recipe.Recipe
 	var exists bool
@@ -54,8 +54,8 @@ func (ds *Datastore) GetRecipeByName(key string) (*recipe.Recipe, bool) {
 }
 
 func (ds *Datastore) GetRecipeById(key string) (*recipe.Recipe, bool) {
-	ds.RLock()
-	defer ds.RUnlock()
+	ds.mu.RLock()
+	defer ds.mu.RUnlock()
 
 	recipe, exists := ds.m[key]
 
@@ -63,8 +63,8 @@ func (ds *Datastore) GetRecipeById(key string) (*recipe.Recipe, bool) {
 }
 
 func (ds *Datastore) ListRecipes() (recipes []recipe.Recipe) {
-	ds.RLock()
-	defer ds.RUnlock()
+	ds.mu.RLock()
+	defer ds.mu.RUnlock()
 
 	for _, r := range ds.m {
 		recipes = append(recipes, r)
@@ -78,8 +78,8 @@ func (ds *Datastore) ListRecipes() (recipes []recipe.Recipe) {
 }
 
 func (ds *Datastore) DeleteRecipe(key string) {
-	ds.RLock()
-	defer ds.RUnlock()
+	ds.mu.RLock()
+	defer ds.mu.RUnlock()
 
 	delete(ds.m, key)
 }

@@ -14,7 +14,6 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 - [ ] Create swagger docs
 
-
 ## Done:
 - [x] Write tests for main.go
 - [x] Write tests for rest.go

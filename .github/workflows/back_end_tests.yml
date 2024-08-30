@@ -30,7 +30,9 @@ jobs:
       run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2
 
     - name: Run golangci-lint
-      run: golangci-lint run
+      env:
+        GO111MODULE: on
+      run: golangci-lint run --timeout=5m --skip-dirs $(go env GOPATH) --skip-files '../../../../../../opt/hostedtoolcache/go/*' ./...
 
     - name: Run tests
       run: go test -v ./...
@@ -39,4 +41,7 @@ jobs:
       run: go test -race -v ./...
 
     - name: Run tests with coverage
-      run: go test -v -coverprofile=coverage.txt -covermode=atomic ./...
+      run: |
+        mkdir -p ./coverage
+        go test -v -coverprofile=./coverage/coverage.txt -covermode=atomic ./...
+
