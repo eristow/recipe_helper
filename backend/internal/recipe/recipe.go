@@ -2,11 +2,7 @@ package recipe
 
 import (
 	"github.com/google/uuid"
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 )
-
-const RecipeDir = "../../data/recipes/"
 
 type Recipe struct {
 	Id          uuid.UUID `json:"id"`
@@ -22,11 +18,6 @@ func NewRecipe(name string, ingredients []string, steps []string) *Recipe {
 		Ingredients: ingredients,
 		Steps:       steps,
 	}
-}
-
-func (r *Recipe) GetNamePretty() string {
-	caser := cases.Title(language.English)
-	return caser.String(r.Name)
 }
 
 func (r *Recipe) NewRecipeId() uuid.UUID {

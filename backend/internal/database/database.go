@@ -20,10 +20,11 @@ func NewDatastore() *Datastore {
 	}
 }
 
-func (ds *Datastore) AddRecipe(key string, r *recipe.Recipe) {
+func (ds *Datastore) AddRecipe(r *recipe.Recipe) {
 	ds.Lock()
 	defer ds.Unlock()
 
+	key := r.Id.String()
 	ds.m[key] = *r
 }
 
@@ -38,7 +39,16 @@ func (ds *Datastore) GetRecipeByName(key string) (*recipe.Recipe, bool) {
 	ds.RLock()
 	defer ds.RUnlock()
 
-	recipe, exists := ds.m[key]
+	var recipe recipe.Recipe
+	var exists bool
+
+	for _, r := range ds.m {
+		if r.Name == key {
+			recipe = r
+			exists = true
+			break
+		}
+	}
 
 	return &recipe, exists
 }

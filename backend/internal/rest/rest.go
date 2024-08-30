@@ -22,16 +22,16 @@ type RecipeHandler struct {
 	store *database.Datastore
 }
 
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	(*w).Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+func enableCors(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
 }
 
 func HandleCors(h http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "OPTIONS" {
-			enableCors(&w)
+			enableCors(w)
 			w.WriteHeader(http.StatusOK)
 		} else {
 			h.ServeHTTP(w, r)
@@ -57,14 +57,14 @@ func getRecipeNameIdFromUrl(r *http.Request) string {
 
 func (h *RootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// TODO: make this return a list of endpoints? or just use swagger/OpenAPI?
-	enableCors(&w)
+	enableCors(w)
 	log.Printf("Root: %s", r.Method)
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Welcome to the Recipe Helper Backend!"))
 }
 
 func (h *RecipeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
+	enableCors(w)
 	log.Printf("Recipes router: %s", r.Method)
 	w.Header().Set("content-type", "application/json")
 	switch {
@@ -142,7 +142,7 @@ func (h *RecipeHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("Adding new recipe: %+v", newRecipe)
 
-	h.store.AddRecipe(newRecipe.Id.String(), &newRecipe)
+	h.store.AddRecipe(&newRecipe)
 
 	recipeJsonBytes, err := json.Marshal(newRecipe)
 	if err != nil {

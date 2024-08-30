@@ -10,18 +10,16 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 ## TODO:
 
-- [ ] Tests
-  - [ ] Write tests for main.go
-  - [ ] Write tests for rest.go
-  - [ ] Write tests for database.go
-  - [ ] Write tests for recipes.go
-
 - [ ] Switch from storing recipes in in-memory to storing them in a database.
 
 - [ ] Create swagger docs
 
 
 ## Done:
+- [x] Write tests for main.go
+- [x] Write tests for rest.go
+- [x] Write tests for database.go
+- [x] Write tests for recipes.go
 - [x] Create PUT endpoint for updating recipes
 - [x] Extract HTML into React front-end
 - [x] Add logging

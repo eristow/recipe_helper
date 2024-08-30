@@ -16,7 +16,9 @@ type slashFix struct {
 }
 
 func (h *slashFix) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	r.URL.Path = strings.Replace(r.URL.Path, "//", "/", -1)
+	for strings.Contains(r.URL.Path, "//") {
+		r.URL.Path = strings.ReplaceAll(r.URL.Path, "//", "/")
+	}
 	h.mux.ServeHTTP(w, r)
 }
 
@@ -38,8 +40,8 @@ func main() {
 		[]string{"Mix warm water, yeast, sugar. Cover and allow to rest for 5 min.", "Add flour, salt, olive oil. Mix until dough forms.", "Knead dough for 5 min.", "Cover and allow to rise for 1 hour.", "Preheat oven to 475F.", "Roll out dough.", "Add sauce, cheese, toppings.", "Bake for 13-15 min."},
 	)
 
-	ds.AddRecipe(pancakeRecipe.Id.String(), pancakeRecipe)
-	ds.AddRecipe(pizzaRecipe.Id.String(), pizzaRecipe)
+	ds.AddRecipe(pancakeRecipe)
+	ds.AddRecipe(pizzaRecipe)
 
 	mux.Handle("/", rest.HandleCors(rootH))
 	mux.Handle("/recipes/", rest.HandleCors(recipeH))
