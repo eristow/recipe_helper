@@ -7,10 +7,8 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 ## TODO:
 
+- [ ] Run tests in GitHub Actions
 - [ ] Use GitHub Actions to deploy to ... somewhere
-
-- [ ] Add tests
-  - [ ] Run tests in GitHub Actions
 
 - [ ] Extract recipe CRUD functions to a service
 - [ ] Add images for recipes
@@ -27,6 +25,7 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
   - [ ] Drop shadow on page container?
 
 ## Done:
+- [x] Add tests
 - [x] Create production Dockerfiles for FE and BE
 - [x] Combine FE and BE into monorepo
 - [x] Use docker-compose to run both
