@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Recipes from "./pages/Recipes";
-import Layout from "./layout";
-import ErrorPage from "./components/ErrorPage";
-import Home from "./pages/Home";
-import { Details } from "./pages/Recipes/Details";
-import Edit from "./pages/Recipes/Edit";
-import Create from "./pages/Recipes/Create";
+import Recipes from "@/pages/Recipes/Recipes";
+import Layout from "@/layout";
+import ErrorPage from "@/components/ErrorPage/ErrorPage";
+import Home from "@/pages/Home/Home";
+import { Details } from "@/pages/Recipes/Details";
+import Edit from "@/pages/Recipes/Edit";
+import Create from "@/pages/Recipes/Create";
 
 const router = createBrowserRouter([
   {

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import H1 from "./H1";
-import P from "./P";
-import { buttonClasses } from "./Button";
+import H1 from "@/components/H1/H1";
+import P from "@/components/P/P";
+import { buttonClasses } from "@/components/Button/Button";
 
 export default function Header() {
   return (

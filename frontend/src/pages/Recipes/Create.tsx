@@ -1,6 +1,6 @@
-import Button from "@/components/Button";
-import H1 from "@/components/H1";
-import PageContainer from "@/components/PageContainer";
+import Button from "@/components/Button/Button";
+import H1 from "@/components/H1/H1";
+import PageContainer from "@/components/PageContainer/PageContainer";
 import { RecipeNoId } from "@/types/Recipe";
 import { cn } from "@/utils/cn";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +70,7 @@ export default function Create() {
   return (
     <PageContainer>
       <H1>Create Recipe</H1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="create-form">
         <div className="grid grid-flow-row gap-2">
           <InputContainer label="Recipe Name:">
             <input
@@ -94,7 +94,9 @@ export default function Create() {
               placeholder="Enter steps, one per line"
             />
           </InputContainer>
-          <Button type="submit">Save</Button>
+          <Button type="submit" data-testid="submit-button">
+            Save
+          </Button>
         </div>
       </form>
     </PageContainer>
