@@ -10,11 +10,20 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 ## TODO:
 
+- [ ] Make LLM format recipes like recipes object
+- [ ] Parse LLM response into recipes object
+- [ ] Tests for rest
+
+- [ ] Split rest.go into multiple files
+
 - [ ] Switch from storing recipes in in-memory to storing them in a database.
 
 - [ ] Create swagger docs
 
 ## Done:
+- [x] Create endpoint for generating recipes from ingredients list.
+  - `POST /recipes/generate`
+  - response: `{"recipes": "LLM RESPONSE"}`
 - [x] Write tests for main.go
 - [x] Write tests for rest.go
 - [x] Write tests for database.go

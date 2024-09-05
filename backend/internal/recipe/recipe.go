@@ -11,6 +11,10 @@ type Recipe struct {
 	Steps       []string  `json:"steps"`
 }
 
+type Ingredients struct {
+	IngredientsList []string `json:"ingredientsList"`
+}
+
 func NewRecipe(name string, ingredients []string, steps []string) *Recipe {
 	return &Recipe{
 		Id:          uuid.New(),

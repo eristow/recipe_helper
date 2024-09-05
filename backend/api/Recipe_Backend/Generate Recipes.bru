@@ -1,0 +1,24 @@
+meta {
+  name: Generate Recipes
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:8080/recipes/generate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "ingredientsList": [
+      "Bananas",
+      "Grapes",
+      "Bread",
+      "Oats",
+      "Honey",
+      "Chocolate Chips"
+    ]
+  }
+}

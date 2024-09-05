@@ -1,6 +1,9 @@
 # Use the official golang 1.22.6 image as the base image
 FROM golang:1.22.6
 
+# Set Ollama host env var
+# ENV OLLAMA_HOST="http://localhost:11434"
+
 # Set the working directory inside the container
 WORKDIR /backend
 

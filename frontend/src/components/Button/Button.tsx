@@ -6,6 +6,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   className?: string;
   type?: "button" | "submit" | "reset";
   color?: string;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -13,6 +14,7 @@ export default function Button({
   className,
   type,
   color = "neutral",
+  disabled,
   ...props
 }: ButtonProps) {
   const colorToClass: { [key: string]: string } = {
@@ -33,6 +35,7 @@ export default function Button({
         className,
       )}
       type={type}
+      disabled={disabled}
       {...props}
     >
       {children}
