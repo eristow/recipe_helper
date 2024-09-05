@@ -1,4 +1,4 @@
-import Button, { buttonClasses } from "@/components/Button/Button";
+import Button from "@/components/Button/Button";
 import H1 from "@/components/H1/H1";
 import H2 from "@/components/H2/H2";
 import P from "@/components/P/P";
@@ -49,13 +49,11 @@ export function Details() {
     <PageContainer>
       <H1>{`${recipe.name}`}</H1>
       <div className="flex justify-between">
-        <Link
-          className={buttonClasses}
-          to={`/recipes/edit/${recipe.id}`}
-          state={{ recipe }}
-        >
-          <P>Edit</P>
-        </Link>
+        <Button>
+          <Link to={`/recipes/edit/${recipe.id}`} state={{ recipe }}>
+            <P>Edit</P>
+          </Link>
+        </Button>
         <Button onClick={() => deleteRecipe(recipe.id)}>
           <P>Delete</P>
         </Button>

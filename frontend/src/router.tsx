@@ -6,6 +6,7 @@ import Home from "@/pages/Home/Home";
 import { Details } from "@/pages/Recipes/Details";
 import Edit from "@/pages/Recipes/Edit";
 import Create from "@/pages/Recipes/Create";
+import Ingredients from "./pages/Ingredients/Ingredients";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/recipes/edit/:recipeId",
         element: <Edit />,
+      },
+      {
+        path: "/ingredients",
+        element: <Ingredients />,
       },
     ],
   },

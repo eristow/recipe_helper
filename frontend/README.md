@@ -11,19 +11,20 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 - [ ] Add fridge/pantry ingredient input
 - [ ] Add recipe suggestion based on fridge/pantry ingredients
-  - [ ] Use Ollama locally, but what to use when deployed?
+- [ ] Add confirmation for delete
+- [ ] Turn header buttons into hamburger menu on mobile
 - [ ] Extract recipe CRUD functions to a service
 - [ ] Add images for recipes
 - [ ] Add search bar to recipes view
 - [ ] Add a shopping list view
 
-- [ ] CSS Improvements
-  - [ ] Fix buttons on header
-  - [ ] Add hover transform (darker) to buttons/links
-  - [ ] Make Create New Recipe link look better
-  - [ ] Drop shadow on page container?
 
 ## Done:
+- [x] Fix buttons on header
+- [x] Drop shadow on page container?
+- [x] Make Create New Recipe link look better
+- [x] Add hover transform (darker) to buttons/links
+- [x] Use Ollama locally, but what to use when deployed? (I think also Ollama, we'll see)
 - [x] Run tests in GitHub Actions
 - [x] Add tests
 - [x] Create production Dockerfiles for FE and BE

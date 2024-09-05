@@ -1,3 +1,4 @@
+import Button from "@/components/Button/Button";
 import H1 from "@/components/H1/H1";
 import H2 from "@/components/H2/H2";
 import PageContainer from "@/components/PageContainer/PageContainer";
@@ -30,25 +31,26 @@ export default function Recipes() {
   return (
     <PageContainer>
       <div className="grid grid-flow-row justify-center">
+        <Button className="p-4" color="green">
+          <Link to="/recipes/create">
+            <H2 className="m-auto">Create New Recipe</H2>
+          </Link>
+        </Button>
         <H1>Recipes</H1>
-        <Link className="p-4 text-blue-700" to="/recipes/create">
-          <H2>Create New Recipe</H2>
-        </Link>
-        {recipes.map((recipe: Recipe) => (
-          <div
-            className="mb-2 flex min-w-56 justify-center rounded-xl border-4 border-solid border-blue-800 p-4 align-middle"
-            key={recipe.id}
-            data-testid="recipe-list"
-          >
-            <Link
-              className="p-4"
-              to={`/recipes/${recipe.id}`}
-              state={{ recipe }}
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+          {recipes.map((recipe: Recipe) => (
+            <Button
+              className="py-6"
+              color="blue"
+              key={recipe.id}
+              data-testid="recipe-list"
             >
-              <H2 className="m-auto">{recipe.name}</H2>
-            </Link>
-          </div>
-        ))}
+              <Link to={`/recipes/${recipe.id}`} state={{ recipe }}>
+                <H2 className="m-auto">{recipe.name}</H2>
+              </Link>
+            </Button>
+          ))}
+        </div>
       </div>
     </PageContainer>
   );
