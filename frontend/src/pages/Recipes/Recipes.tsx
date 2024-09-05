@@ -18,7 +18,6 @@ export default function Recipes() {
       try {
         const response = await fetch(`${backendUrl}/recipes`);
         const data: Recipe[] = await response.json();
-        console.log(data);
         setRecipes(data);
       } catch (error) {
         console.error(`Failed to fetch recipes: ${error}`);

@@ -11,6 +11,7 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 - [ ] Add fridge/pantry ingredient input
 - [ ] Add recipe suggestion based on fridge/pantry ingredients
+- [ ] Combine create and edit recipe pages
 - [ ] Add confirmation for delete
 - [ ] Turn header buttons into hamburger menu on mobile
 - [ ] Extract recipe CRUD functions to a service

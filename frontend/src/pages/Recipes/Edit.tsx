@@ -1,8 +1,9 @@
 import Button from "@/components/Button/Button";
 import H1 from "@/components/H1/H1";
+import Input from "@/components/Input/Input";
 import PageContainer from "@/components/PageContainer/PageContainer";
+import TextArea from "@/components/TextArea/TextArea";
 import { Recipe } from "@/types/Recipe";
-import { cn } from "@/utils/cn";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 // TODO: move this to a shared location for Edit and Details?
@@ -24,10 +25,6 @@ function InputContainer({
     </div>
   );
 }
-
-const inputClassNames =
-  "rounded-lg border border-solid border-neutral-800 bg-neutral-900 p-1";
-const textAreaClassNames = cn(inputClassNames, "h-32");
 
 export default function Edit() {
   const { recipeId } = useParams();
@@ -90,24 +87,17 @@ export default function Edit() {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-flow-row gap-2">
           <InputContainer label="Recipe Name:">
-            <input
-              name="recipeName"
-              className={inputClassNames}
-              type="text"
-              defaultValue={recipe.name}
-            />
+            <Input name="recipeName" type="text" defaultValue={recipe.name} />
           </InputContainer>
           <InputContainer label="Recipe Ingredients:">
-            <textarea
+            <TextArea
               name="recipeIngredients"
-              className={textAreaClassNames}
               defaultValue={recipe.ingredients.join("\n")}
             />
           </InputContainer>
           <InputContainer label="Recipe Steps:">
-            <textarea
+            <TextArea
               name="recipeSteps"
-              className={textAreaClassNames}
               defaultValue={recipe.steps.join("\n")}
             />
           </InputContainer>

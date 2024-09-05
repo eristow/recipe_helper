@@ -1,8 +1,9 @@
 import Button from "@/components/Button/Button";
 import H1 from "@/components/H1/H1";
+import Input from "@/components/Input/Input";
 import PageContainer from "@/components/PageContainer/PageContainer";
+import TextArea from "@/components/TextArea/TextArea";
 import { RecipeNoId } from "@/types/Recipe";
-import { cn } from "@/utils/cn";
 import { useNavigate } from "react-router-dom";
 
 function InputContainer({
@@ -19,10 +20,6 @@ function InputContainer({
     </div>
   );
 }
-
-const inputClassNames =
-  "rounded-lg border border-solid border-neutral-800 bg-neutral-900 p-1";
-const textAreaClassNames = cn(inputClassNames, "h-32");
 
 export default function Create() {
   const navigate = useNavigate();
@@ -73,24 +70,17 @@ export default function Create() {
       <form onSubmit={handleSubmit} data-testid="create-form">
         <div className="grid grid-flow-row gap-2">
           <InputContainer label="Recipe Name:">
-            <input
-              name="recipeName"
-              className={inputClassNames}
-              type="text"
-              placeholder="Recipe Name"
-            />
+            <Input name="recipeName" type="text" placeholder="Recipe Name" />
           </InputContainer>
           <InputContainer label="Recipe Ingredients:">
-            <textarea
+            <TextArea
               name="recipeIngredients"
-              className={textAreaClassNames}
               placeholder="Enter ingredients, one per line"
             />
           </InputContainer>
           <InputContainer label="Recipe Steps:">
-            <textarea
+            <TextArea
               name="recipeSteps"
-              className={textAreaClassNames}
               placeholder="Enter steps, one per line"
             />
           </InputContainer>
