@@ -9,12 +9,12 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 - [ ] Use GitHub Actions to deploy to ... somewhere
 
-- [ ] Extract recipe CRUD functions to a service
-- [ ] Add images for recipes
-- [ ] Add search bar to recipes view
 - [ ] Add fridge/pantry ingredient input
 - [ ] Add recipe suggestion based on fridge/pantry ingredients
   - [ ] Use Ollama locally, but what to use when deployed?
+- [ ] Extract recipe CRUD functions to a service
+- [ ] Add images for recipes
+- [ ] Add search bar to recipes view
 - [ ] Add a shopping list view
 
 - [ ] CSS Improvements

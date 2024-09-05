@@ -34,3 +34,21 @@ services:
 
     command: sh -c "go install github.com/air-verse/air@latest &&
       air -c .air.toml"
+
+  ollama:
+    container_name: ollama
+
+    image: recipe_helper_ollama
+
+    build:
+      context: ./ollama
+      dockerfile: Dockerfile
+
+    ports:
+      - '11434:11434'
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
