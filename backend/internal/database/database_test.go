@@ -1,17 +1,18 @@
-package database
+package database_test
 
 import (
 	"reflect"
 	"testing"
 
+	"github.com/eristow/recipe_helper_backend/internal/database"
 	"github.com/eristow/recipe_helper_backend/internal/recipe"
 )
 
-var ds *Datastore
+var ds *database.Datastore
 var r *recipe.Recipe
 
 func setup(_ testing.TB) func(tb testing.TB) {
-	ds = NewDatastore()
+	ds = database.NewDatastore()
 	r = recipe.NewRecipe("Chocolate Cake", []string{"Flour", "Sugar", "Cocoa Powder"}, []string{"Mix ingredients", "Bake at 350F for 30 min"})
 	ds.AddRecipe(r)
 
@@ -25,9 +26,9 @@ func TestAddRecipe(t *testing.T) {
 	teardown := setup(t)
 	defer teardown(t)
 
-	if addedRecipe, exists := ds.m[r.Id.String()]; !exists {
+	if addedRecipe, exists := ds.GetRecipeById(r.Id.String()); !exists {
 		t.Errorf("AddRecipe() did not add the recipe")
-	} else if !reflect.DeepEqual(addedRecipe, *r) {
+	} else if !reflect.DeepEqual(*addedRecipe, *r) {
 		t.Errorf("AddRecipe() added incorrect recipe: got %v, want %v", addedRecipe, *r)
 	}
 }
@@ -44,9 +45,9 @@ func TestUpdateRecipe(t *testing.T) {
 	}
 	ds.UpdateRecipe(r.Id.String(), updatedRecipe)
 
-	if updated, exists := ds.m[r.Id.String()]; !exists {
+	if updated, exists := ds.GetRecipeById(r.Id.String()); !exists {
 		t.Errorf("UpdateRecipe() did not update the recipe")
-	} else if !reflect.DeepEqual(updated, *updatedRecipe) {
+	} else if !reflect.DeepEqual(*updated, *updatedRecipe) {
 		t.Errorf("UpdateRecipe() updated incorrect recipe: got %v, want %v", updated, *updatedRecipe)
 	}
 }
@@ -90,9 +91,9 @@ func TestDeleteRecipe(t *testing.T) {
 
 	ds.DeleteRecipe(r.Id.String())
 
-	if _, exists := ds.m["Chocolate Cake"]; exists {
+	if _, exists := ds.GetRecipeByName("Chocolate Cake"); exists {
 		t.Errorf("DeleteRecipe() did not delete the recipe")
-	} else if len(ds.m) != 0 {
+	} else if len(ds.ListRecipes()) != 0 {
 		t.Errorf("DeleteRecipe() did not delete the recipe")
 	}
 }

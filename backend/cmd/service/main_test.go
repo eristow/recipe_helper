@@ -9,6 +9,7 @@ import (
 	"github.com/eristow/recipe_helper_backend/internal/database"
 	"github.com/eristow/recipe_helper_backend/internal/recipe"
 	"github.com/eristow/recipe_helper_backend/internal/rest"
+	"github.com/eristow/recipe_helper_backend/internal/util"
 )
 
 func TestSlashFix(t *testing.T) {
@@ -66,9 +67,9 @@ func TestRoutes(t *testing.T) {
 	ds.AddRecipe(testRecipe)
 
 	mux := http.NewServeMux()
-	mux.Handle("/", rest.HandleCors(rootH))
-	mux.Handle("/recipes/", rest.HandleCors(recipeH))
-	mux.Handle("/recipes", rest.HandleCors(recipeH))
+	mux.Handle("/", util.HandleCors(rootH))
+	mux.Handle("/recipes/", util.HandleCors(recipeH))
+	mux.Handle("/recipes", util.HandleCors(recipeH))
 
 	testCases := []struct {
 		name           string

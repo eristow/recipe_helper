@@ -10,15 +10,13 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 ## TODO:
 
-- [ ] Tests for rest after adding generate endpoint
-
-- [ ] Split rest.go into multiple files (by endpoint?)
-
 - [ ] Switch from storing recipes in in-memory to storing them in a database.
 
 - [ ] Create swagger docs
 
 ## Done:
+- [x] Split rest.go into multiple files (by endpoint?)
+- [x] Tests for rest after adding generate endpoint
 - [x] Make LLM format recipes like recipes object
 - [x] Parse LLM response into recipes object
 - [x] Create endpoint for generating recipes from ingredients list.

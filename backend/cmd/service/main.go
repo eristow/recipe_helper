@@ -9,6 +9,7 @@ import (
 	"github.com/eristow/recipe_helper_backend/internal/database"
 	"github.com/eristow/recipe_helper_backend/internal/recipe"
 	"github.com/eristow/recipe_helper_backend/internal/rest"
+	"github.com/eristow/recipe_helper_backend/internal/util"
 	"github.com/ollama/ollama/api"
 )
 
@@ -50,9 +51,9 @@ func main() {
 	ds.AddRecipe(pancakeRecipe)
 	ds.AddRecipe(pizzaRecipe)
 
-	mux.Handle("/", rest.HandleCors(rootH))
-	mux.Handle("/recipes/", rest.HandleCors(recipeH))
-	mux.Handle("/recipes", rest.HandleCors(recipeH))
+	mux.Handle("/", util.HandleCors(rootH))
+	mux.Handle("/recipes/", util.HandleCors(recipeH))
+	mux.Handle("/recipes", util.HandleCors(recipeH))
 	fmt.Println("Server running on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", &slashFix{mux}))
 }
