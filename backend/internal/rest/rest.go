@@ -22,9 +22,14 @@ var (
 	generateRecipeRe = regexp.MustCompile(`^\/recipes\/generate\/*$`)
 )
 
+type OllamaClient interface {
+	Generate(ctx context.Context, req *api.GenerateRequest, respFunc api.GenerateResponseFunc) error
+}
+
 type RootHandler struct{}
 type RecipeHandler struct {
-	store *database.Datastore
+	store  *database.Datastore
+	client OllamaClient
 }
 
 func enableCors(w http.ResponseWriter) {
@@ -44,29 +49,12 @@ func HandleCors(h http.Handler) http.HandlerFunc {
 	}
 }
 
-func newTrue() *bool {
-	b := true
-	return &b
-}
-
-func newFalse() *bool {
-	b := false
-	return &b
-}
-
-func firstN(s string, n int) string {
-	if n > len(s) {
-		return s
-	}
-	return s[:n]
-}
-
 func NewRootHandler() *RootHandler {
 	return &RootHandler{}
 }
 
-func NewRecipeHandler(store *database.Datastore) *RecipeHandler {
-	return &RecipeHandler{store: store}
+func NewRecipeHandler(store *database.Datastore, client OllamaClient) *RecipeHandler {
+	return &RecipeHandler{store: store, client: client}
 }
 
 func getRecipeNameIdFromUrl(r *http.Request) string {
@@ -245,14 +233,7 @@ func (h *RecipeHandler) Generate(w http.ResponseWriter, r *http.Request) {
 	var ingredientsList recipe.Ingredients
 	if err := json.NewDecoder(r.Body).Decode(&ingredientsList); err != nil {
 		log.Println("Error decoding ingredients list:", err)
-		internalServerError(w, r)
-		return
-	}
-
-	client, err := api.ClientFromEnvironment()
-	if err != nil {
-		log.Println("Error creating client:", err)
-		internalServerError(w, r)
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
 
@@ -279,7 +260,7 @@ func (h *RecipeHandler) Generate(w http.ResponseWriter, r *http.Request) {
 		return nil
 	}
 
-	err = client.Generate(ctx, req, respFunc)
+	err := h.client.Generate(ctx, req, respFunc)
 	if err != nil {
 		log.Println("Error generating recipe:", err)
 		internalServerError(w, r)
@@ -322,4 +303,21 @@ func internalServerError(w http.ResponseWriter, _ *http.Request) {
 func notFound(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	w.Write([]byte("404 not found"))
+}
+
+func newTrue() *bool {
+	b := true
+	return &b
+}
+
+func newFalse() *bool {
+	b := false
+	return &b
+}
+
+func firstN(s string, n int) string {
+	if n > len(s) {
+		return s
+	}
+	return s[:n]
 }

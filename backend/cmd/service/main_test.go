@@ -56,7 +56,7 @@ func TestSlashFix(t *testing.T) {
 func TestRoutes(t *testing.T) {
 	ds := database.NewDatastore()
 	rootH := rest.NewRootHandler()
-	recipeH := rest.NewRecipeHandler(ds)
+	recipeH := rest.NewRecipeHandler(ds, nil)
 
 	testRecipe := recipe.NewRecipe(
 		"Test Recipe",

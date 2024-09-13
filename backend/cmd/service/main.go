@@ -9,6 +9,7 @@ import (
 	"github.com/eristow/recipe_helper_backend/internal/database"
 	"github.com/eristow/recipe_helper_backend/internal/recipe"
 	"github.com/eristow/recipe_helper_backend/internal/rest"
+	"github.com/ollama/ollama/api"
 )
 
 type slashFix struct {
@@ -24,9 +25,15 @@ func (h *slashFix) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	ds := database.NewDatastore()
 	rootH := rest.NewRootHandler()
-	recipeH := rest.NewRecipeHandler(ds)
+
+	ds := database.NewDatastore()
+	client, err := api.ClientFromEnvironment()
+	if err != nil {
+		log.Println("Error creating client:", err)
+		return
+	}
+	recipeH := rest.NewRecipeHandler(ds, client)
 
 	// Add test recipes
 	pancakeRecipe := recipe.NewRecipe(
