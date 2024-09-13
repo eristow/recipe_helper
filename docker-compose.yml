@@ -38,6 +38,21 @@ services:
     command: sh -c "go install github.com/air-verse/air@latest &&
       air -c .air.toml"
 
+  database:
+    container_name: database
+
+    image: recipe_helper_database
+
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+
+    ports:
+      - '5432:5432'
+
+    volumes:
+      - ./database:/database
+
   ollama:
     container_name: ollama
 

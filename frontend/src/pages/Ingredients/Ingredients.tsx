@@ -10,17 +10,30 @@ import { useState } from "react";
 export default function Ingredients() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [pending, setPending] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     console.log(`Getting recipes based on ingredients...`);
+    setError(null);
     setPending(true);
     setRecipes([]);
 
-    const ingredients = event.currentTarget.ingredients.value;
+    const form = event.currentTarget;
+    const ingredientsTextArea = form.elements.namedItem(
+      "ingredients",
+    ) as HTMLTextAreaElement;
+    const ingredients = ingredientsTextArea?.value;
+
+    if (!ingredients || ingredients.trim() === "") {
+      console.error(`No ingredients provided`);
+      setError("There was an error processing your request. Please try again.");
+      setPending(false);
+      return;
+    }
 
     const ingredientsList = ingredients.split("\n");
-    console.log(ingredientsList);
+    console.log("ingredientsList:", ingredientsList);
 
     generateRecipes(ingredientsList);
   }
@@ -60,6 +73,7 @@ export default function Ingredients() {
               disabled={pending}
               name="ingredients"
               placeholder="Enter ingredients from your pantry or refrigerator, one per line"
+              data-testid="ingredients-textarea"
             />
             <Button
               disabled={pending}
@@ -71,6 +85,11 @@ export default function Ingredients() {
           </div>
         </form>
       </PageContainer>
+      {error && (
+        <PageContainer className="max-w-3xl pt-4">
+          <P className="text-red-600">{error}</P>
+        </PageContainer>
+      )}
       {(pending || recipes.length != 0) && (
         <PageContainer className="max-w-3xl">
           {pending && (
@@ -82,7 +101,6 @@ export default function Ingredients() {
               </span>
             </div>
           )}
-          {/* TODO: figure out where the duplicate key is... */}
           {recipes.length != 0 && (
             <div>
               <H1 className="mb-6">Suggested Recipes</H1>
@@ -98,15 +116,12 @@ export default function Ingredients() {
                   <div>
                     <H2>Steps:</H2>
                     {recipe.steps.map((step, index) => (
-                      <>
-                        <P
-                          className="whitespace-pre-line"
-                          key={recipe.id + step + index}
-                        >
+                      <div key={recipe.id + step + index}>
+                        <P className="whitespace-pre-line">
                           {index + 1}. {step}
                           {"\n"}
                         </P>
-                      </>
+                      </div>
                     ))}
                   </div>
                 </div>
