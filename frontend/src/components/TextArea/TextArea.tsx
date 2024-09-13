@@ -1,13 +1,16 @@
 import { cn } from "@/utils/cn";
 
-export default function TextArea(
-  props: React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-) {
+interface TextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  className?: string;
+}
+
+export default function TextArea({ className, ...props }: TextAreaProps) {
   return (
     <textarea
       className={cn(
-        "rounded-lg border border-solid border-neutral-800 bg-neutral-900 p-1",
-        "h-32",
+        "h-32 rounded-lg border border-solid border-neutral-800 bg-neutral-900 p-1",
+        className,
       )}
       {...props}
     />

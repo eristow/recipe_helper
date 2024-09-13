@@ -9,8 +9,6 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 - [ ] Use GitHub Actions to deploy to ... somewhere
 
-- [ ] Add fridge/pantry ingredient input
-- [ ] Add recipe suggestion based on fridge/pantry ingredients
 - [ ] Combine create and edit recipe pages
 - [ ] Add confirmation for delete
 - [ ] Turn header buttons into hamburger menu on mobile
@@ -21,6 +19,9 @@ This app is a recipe helper that allows users to add, view, and delete recipes. 
 
 
 ## Done:
+- [x] Tests for Ingredients page
+- [x] Add recipe suggestion based on fridge/pantry ingredients
+- [x] Add fridge/pantry ingredient input
 - [x] Fix buttons on header
 - [x] Drop shadow on page container?
 - [x] Make Create New Recipe link look better
