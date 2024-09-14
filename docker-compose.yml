@@ -8,6 +8,9 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
 
+    depends_on:
+      - backend
+
     ports:
       - '3000:3000'
 
@@ -26,6 +29,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile
 
+    depends_on:
+      - database
+      - ollama
+
     environment:
       - OLLAMA_HOST=http://ollama:11434
 
@@ -43,15 +50,15 @@ services:
 
     image: recipe_helper_database
 
+    environment:
+      - DATABASE_URL=postgresql://defaultuser:defaultpassword@database:5432/defaultdatabase
+
     build:
       context: ./database
       dockerfile: Dockerfile
 
     ports:
       - '5432:5432'
-
-    volumes:
-      - ./database:/database
 
   ollama:
     container_name: ollama
