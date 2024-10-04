@@ -1,5 +1,5 @@
-# Use the official golang 1.22.6 image as the base image
-FROM golang:1.22.6
+# Use the official golang 1.23.2 image as the base image
+FROM golang:1.23.2
 
 # Set Ollama host env var
 # ENV OLLAMA_HOST="http://localhost:11434"

@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/eristow/recipe_helper_backend/internal/database"
-	"github.com/eristow/recipe_helper_backend/internal/recipe"
+	"github.com/eristow/recipe_helper/internal/database"
+	"github.com/eristow/recipe_helper/internal/recipe"
 	"github.com/google/uuid"
 )
 

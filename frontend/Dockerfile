@@ -1,5 +1,5 @@
 # Use the official Node.js 22 image as the base image
-FROM node:22
+FROM node:22.6.0
 
 # Set the working directory inside the container
 WORKDIR /frontend

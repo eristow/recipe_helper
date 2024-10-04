@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/eristow/recipe_helper_backend/internal/database"
-	"github.com/eristow/recipe_helper_backend/internal/recipe"
-	"github.com/eristow/recipe_helper_backend/internal/rest"
+	"github.com/eristow/recipe_helper/internal/database"
+	"github.com/eristow/recipe_helper/internal/recipe"
+	"github.com/eristow/recipe_helper/internal/rest"
 )
 
 type slashFix struct {
