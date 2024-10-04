@@ -7,7 +7,7 @@ pr:
 
 variables:
   - name: GO_VERSION
-    value: '1.22'
+    value: '1.23'
   - name: NODE_VERSION
     value: '22.x'
   - name: DOCKER_REPOSITORY
@@ -49,8 +49,9 @@ jobs:
     workingDirectory: '$(System.DefaultWorkingDirectory)/backend'
     displayName: 'Run tests with coverage'
   - task: Docker@2
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     inputs:
-      containerRegistry: 'recipe_helper'
+      containerRegistry: 'DockerHubConnection'
       repository: '$(DOCKER_REPOSITORY)/backend'
       command: 'buildAndPush'
       Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile-backend'
@@ -80,8 +81,9 @@ jobs:
     workingDirectory: '$(System.DefaultWorkingDirectory)/frontend'
     displayName: 'Run tests'
   - task: Docker@2
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     inputs:
-      containerRegistry: 'recipe_helper'
+      containerRegistry: 'DockerHubConnection'
       repository: '$(DOCKER_REPOSITORY)/frontend'
       command: 'buildAndPush'
       Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile-frontend'
@@ -93,10 +95,11 @@ jobs:
   displayName: 'Build Database Docker Image'
   pool:
     vmImage: 'ubuntu-latest'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   steps:
   - task: Docker@2
     inputs:
-      containerRegistry: 'recipe_helper'
+      containerRegistry: 'DockerHubConnection'
       repository: '$(DOCKER_REPOSITORY)/database'
       command: 'buildAndPush'
       Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile-database'
@@ -108,10 +111,11 @@ jobs:
   displayName: 'Build Ollama Docker Image'
   pool:
     vmImage: 'ubuntu-latest'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   steps:
   - task: Docker@2
     inputs:
-      containerRegistry: 'recipe_helper'
+      containerRegistry: 'DockerHubConnection'
       repository: '$(DOCKER_REPOSITORY)/ollama'
       command: 'buildAndPush'
       Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile-ollama'
