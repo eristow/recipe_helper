@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/eristow/recipe_helper_backend/internal/recipe"
+	"github.com/eristow/recipe_helper/internal/recipe"
 )
 
 var ds *Datastore

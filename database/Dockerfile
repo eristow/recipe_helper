@@ -1,5 +1,5 @@
 # Use the official PostgreSQL image from the Docker Hub
-FROM postgres:latest
+FROM postgres:16.4
 
 # Set default environment variables for PostgreSQL
 # To set env vars when running Docker container, use the -e flag
