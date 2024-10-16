@@ -29,4 +29,4 @@ jobs:
         context: .
         file: ./ollama/Dockerfile
         push: true
-        tags: ${{ env.DOCKER_REPOSITORY }}/ollama:latest,${{ env.DOCKER_REPOSITORY }}/ollama:${{ github.sha }}
+        tags: ${{ env.DOCKER_REPOSITORY }}/recipe_helper_ollama:latest,${{ env.DOCKER_REPOSITORY }}/recipe_helper_ollama:${{ github.sha }}

@@ -7,7 +7,7 @@ pr:
 
 variables:
   - name: GO_VERSION
-    value: '1.23'
+    value: '1.23.0'
   - name: NODE_VERSION
     value: '22.x'
   - name: DOCKER_REPOSITORY
@@ -56,7 +56,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/backend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile-backend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -88,7 +88,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/frontend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile-frontend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -106,7 +106,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/backend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile-backend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -121,7 +121,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/frontend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile-frontend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -136,7 +136,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/database'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile-database'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -151,7 +151,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/ollama'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile-ollama'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest

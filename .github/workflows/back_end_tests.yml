@@ -71,5 +71,5 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_REPOSITORY }}/backend:latest,${{ env.DOCKER_REPOSITORY }}/backend:${{ github.sha }}
+          tags: ${{ env.DOCKER_REPOSITORY }}/recipe_helper_backend:latest,${{ env.DOCKER_REPOSITORY }}/recipe_helper_backend:${{ github.sha }}
 
