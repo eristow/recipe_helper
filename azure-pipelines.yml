@@ -110,8 +110,8 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile'
         tags: |
+          recipe_helper_backend
           $(Build.BuildId)
-          latest
 
   - job: BuildFrontendDocker
     displayName: 'Build Frontend Docker Image'
@@ -125,8 +125,8 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile'
         tags: |
+          recipe_helper_frontend
           $(Build.BuildId)
-          latest
 
   - job: BuildDatabaseImage
     displayName: 'Build Database Docker Image'
@@ -140,8 +140,8 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
+          recipe_helper_database
           $(Build.BuildId)
-          latest
 
   - job: BuildOllamaImage
     displayName: 'Build Ollama Docker Image'
@@ -155,5 +155,5 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
+          recipe_helper_ollama
           $(Build.BuildId)
-          latest

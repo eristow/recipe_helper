@@ -30,7 +30,7 @@ jobs:
       run: go mod download
 
     - name: Install golangci-lint
-      run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2
+      run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.60.3
 
     - name: Run golangci-lint
       env:
@@ -71,5 +71,5 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_REPOSITORY }}/recipe_helper_backend:latest,${{ env.DOCKER_REPOSITORY }}/recipe_helper_backend:${{ github.sha }}
+          tags: ${{ env.DOCKER_REPOSITORY }}/recipe_helper:recipe_helper_backend
 
