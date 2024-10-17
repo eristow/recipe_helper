@@ -44,10 +44,10 @@ func HandleCors(h http.Handler) http.HandlerFunc {
 	}
 }
 
-func newTrue() *bool {
-	b := true
-	return &b
-}
+// func newTrue() *bool {
+// 	b := true
+// 	return &b
+// }
 
 func newFalse() *bool {
 	b := false
@@ -59,6 +59,14 @@ func firstN(s string, n int) string {
 		return s
 	}
 	return s[:n]
+}
+
+func LogWrite(n int, err error) {
+	if err != nil {
+		log.Printf("Error writing response: %v", err)
+	} else {
+		log.Printf("Wrote %d bytes", n)
+	}
 }
 
 func NewRootHandler() *RootHandler {
@@ -82,7 +90,7 @@ func (h *RootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	enableCors(w)
 	log.Printf("Root: %s", r.Method)
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Welcome to the Recipe Helper Backend!"))
+	LogWrite(w.Write([]byte("Welcome to the Recipe Helper Backend!")))
 }
 
 func (h *RecipeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -127,7 +135,7 @@ func (h *RecipeHandler) List(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(recipesJsonBytes)
+	LogWrite(w.Write(recipesJsonBytes))
 }
 
 func (h *RecipeHandler) Get(w http.ResponseWriter, r *http.Request) {
@@ -143,7 +151,7 @@ func (h *RecipeHandler) Get(w http.ResponseWriter, r *http.Request) {
 
 	if !exists {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("recipe not found"))
+		LogWrite(w.Write([]byte("recipe not found")))
 		return
 	}
 
@@ -155,7 +163,7 @@ func (h *RecipeHandler) Get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(recipeJsonBytes)
+	LogWrite(w.Write(recipeJsonBytes))
 }
 
 func (h *RecipeHandler) Create(w http.ResponseWriter, r *http.Request) {
@@ -183,7 +191,7 @@ func (h *RecipeHandler) Create(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Added new recipe: %+v", newRecipe)
 
 	w.WriteHeader(http.StatusCreated)
-	w.Write(recipeJsonBytes)
+	LogWrite(w.Write(recipeJsonBytes))
 }
 
 func (h *RecipeHandler) Update(w http.ResponseWriter, r *http.Request) {
@@ -220,7 +228,7 @@ func (h *RecipeHandler) Update(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Updated recipe: %+v", updatedRecipe)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(recipeJsonBytes)
+	LogWrite(w.Write(recipeJsonBytes))
 }
 
 func (h *RecipeHandler) Delete(w http.ResponseWriter, r *http.Request) {
@@ -235,7 +243,7 @@ func (h *RecipeHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Deleted recipe: %s", recipeId)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Deleted recipe: " + recipeId))
+	LogWrite(w.Write([]byte("Deleted recipe: " + recipeId)))
 }
 
 func (h *RecipeHandler) Generate(w http.ResponseWriter, r *http.Request) {
@@ -311,15 +319,15 @@ func (h *RecipeHandler) Generate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(recipesBytes)
+	LogWrite(w.Write(recipesBytes))
 }
 
 func internalServerError(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
-	w.Write([]byte("500 internal server error"))
+	LogWrite(w.Write([]byte("500 internal server error")))
 }
 
 func notFound(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	w.Write([]byte("404 not found"))
+	LogWrite(w.Write([]byte("404 not found")))
 }

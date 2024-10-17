@@ -14,7 +14,7 @@ import (
 func TestSlashFix(t *testing.T) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(r.URL.Path))
+		rest.LogWrite(w.Write([]byte(r.URL.Path)))
 	})
 
 	slashFixHandler := &slashFix{mux: handler}

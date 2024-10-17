@@ -36,7 +36,7 @@ stages:
       displayName: 'Install golangci-lint'
     - script: |
         export GO111MODULE=on
-        $(go env GOPATH)/bin/golangci-lint run --timeout=$(LINTER_TIMEOUT) --skip-dirs $(go env GOPATH) --skip-files '../../../../../../opt/hostedtoolcache/go/*' ./...
+        $(go env GOPATH)/bin/golangci-lint run --timeout=$(LINTER_TIMEOUT) --exclude-dirs $(go env GOPATH) ./...
       workingDirectory: '$(System.DefaultWorkingDirectory)/backend'
       displayName: 'Run golangci-lint'
     - script: |
