@@ -65,4 +65,4 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_REPOSITORY }}/frontend:latest,${{ env.DOCKER_REPOSITORY }}/frontend:${{ github.sha }}
+          tags: ${{ env.DOCKER_REPOSITORY }}/recipe_helper:recipe_helper_frontend

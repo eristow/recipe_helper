@@ -7,11 +7,13 @@ pr:
 
 variables:
   - name: GO_VERSION
-    value: '1.23'
+    value: '1.23.0'
   - name: NODE_VERSION
     value: '22.x'
   - name: DOCKER_REPOSITORY
     value: 'nave321/recipe_helper'
+  - name: LINTER_TIMEOUT
+    value: '5m'
 
 stages:
 - stage: Build
@@ -26,15 +28,15 @@ stages:
         version: '$(GO_VERSION)'
     - task: Go@0
       inputs:
-        command: 'get'
-        arguments: '-d'
+        command: 'build'
+        arguments: '-o ./main ./cmd/service/main.go'
         workingDirectory: '$(System.DefaultWorkingDirectory)/backend'
     - script: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.60.3
       displayName: 'Install golangci-lint'
     - script: |
         export GO111MODULE=on
-        golangci-lint run --timeout=5m --skip-dirs $(go env GOPATH) --skip-files '../../../../../../opt/hostedtoolcache/go/*' ./...
+        $(go env GOPATH)/bin/golangci-lint run --timeout=$(LINTER_TIMEOUT) --exclude-dirs $(go env GOPATH) ./...
       workingDirectory: '$(System.DefaultWorkingDirectory)/backend'
       displayName: 'Run golangci-lint'
     - script: |
@@ -56,7 +58,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/backend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile-backend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -88,7 +90,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/frontend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile-frontend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
@@ -106,10 +108,10 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/backend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile-backend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile'
         tags: |
+          recipe_helper_backend
           $(Build.BuildId)
-          latest
 
   - job: BuildFrontendDocker
     displayName: 'Build Frontend Docker Image'
@@ -121,10 +123,10 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/frontend'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile-frontend'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile'
         tags: |
+          recipe_helper_frontend
           $(Build.BuildId)
-          latest
 
   - job: BuildDatabaseImage
     displayName: 'Build Database Docker Image'
@@ -136,10 +138,10 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/database'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile-database'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
+          recipe_helper_database
           $(Build.BuildId)
-          latest
 
   - job: BuildOllamaImage
     displayName: 'Build Ollama Docker Image'
@@ -151,7 +153,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: '$(DOCKER_REPOSITORY)/ollama'
         command: 'buildAndPush'
-        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile-ollama'
+        Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
+          recipe_helper_ollama
           $(Build.BuildId)
-          latest
