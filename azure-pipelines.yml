@@ -106,7 +106,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHubConnection'
-        repository: '$(DOCKER_REPOSITORY)/backend'
+        repository: '$(DOCKER_REPOSITORY):recipe_helper_backend'
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/backend/Dockerfile'
         tags: |
@@ -121,7 +121,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHubConnection'
-        repository: '$(DOCKER_REPOSITORY)/frontend'
+        repository: '$(DOCKER_REPOSITORY):recipe_helper_frontend'
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/frontend/Dockerfile'
         tags: |
@@ -136,7 +136,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHubConnection'
-        repository: '$(DOCKER_REPOSITORY)/database'
+        repository: '$(DOCKER_REPOSITORY):recipe_helper_database'
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
@@ -151,7 +151,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHubConnection'
-        repository: '$(DOCKER_REPOSITORY)/ollama'
+        repository: '$(DOCKER_REPOSITORY):recipe_helper_ollama'
         command: 'buildAndPush'
         Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
         tags: |
